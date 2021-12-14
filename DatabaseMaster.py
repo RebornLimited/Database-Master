@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 import sys
 import pymysql
 
@@ -33,7 +34,6 @@ class Ui_MainWindow(object):
         self.lineEdit_host.setGeometry(QtCore.QRect(0, 180, 111, 31))
         self.lineEdit_host.setStyleSheet("color: rgb(170, 170, 170);")
         self.lineEdit_host.setText("")
-        self.lineEdit_host.setPlaceholderText("")
         self.lineEdit_host.setObjectName("lineEdit_host")
         self.label_host = QtWidgets.QLabel(self.tab_1)
         self.label_host.setGeometry(QtCore.QRect(0, 130, 111, 51))
@@ -65,7 +65,6 @@ class Ui_MainWindow(object):
         self.lineEdit_user.setGeometry(QtCore.QRect(110, 180, 121, 31))
         self.lineEdit_user.setStyleSheet("color: rgb(170, 170, 170);")
         self.lineEdit_user.setText("")
-        self.lineEdit_user.setPlaceholderText("")
         self.lineEdit_user.setObjectName("lineEdit_user")
         self.label_password = QtWidgets.QLabel(self.tab_1)
         self.label_password.setGeometry(QtCore.QRect(240, 130, 131, 51))
@@ -103,10 +102,9 @@ class Ui_MainWindow(object):
         self.lineEdit_database.setGeometry(QtCore.QRect(370, 180, 141, 31))
         self.lineEdit_database.setStyleSheet("color: rgb(170, 170, 170);")
         self.lineEdit_database.setText("")
-        self.lineEdit_database.setPlaceholderText("")
         self.lineEdit_database.setObjectName("lineEdit_database")
-        self.label_request = QtWidgets.QLabel(self.tab_1)
-        self.label_request.setGeometry(QtCore.QRect(200, 300, 111, 51))
+        self.label_command = QtWidgets.QLabel(self.tab_1)
+        self.label_command.setGeometry(QtCore.QRect(190, 300, 131, 51))
         font = QtGui.QFont()
         font.setPointSize(15)
         font.setBold(True)
@@ -115,25 +113,25 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         font.setStrikeOut(False)
         font.setKerning(True)
-        self.label_request.setFont(font)
-        self.label_request.setStyleSheet("color: rgb(255, 255, 255);")
-        self.label_request.setObjectName("label_request")
-        self.lineEdit_request = QtWidgets.QLineEdit(self.tab_1)
-        self.lineEdit_request.setGeometry(QtCore.QRect(0, 360, 511, 51))
-        self.lineEdit_request.setStyleSheet("color: rgb(170, 170, 170);")
-        self.lineEdit_request.setText("")
-        self.lineEdit_request.setPlaceholderText("")
-        self.lineEdit_request.setObjectName("lineEdit_request")
-        self.btn_done = QtWidgets.QPushButton(self.tab_1)
-        self.btn_done.setGeometry(QtCore.QRect(190, 420, 131, 71))
+        self.label_command.setFont(font)
+        self.label_command.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_command.setObjectName("label_command")
+        self.lineEdit_command = QtWidgets.QLineEdit(self.tab_1)
+        self.lineEdit_command.setGeometry(QtCore.QRect(0, 360, 511, 51))
+        self.lineEdit_command.setStyleSheet("color: rgb(170, 170, 170);")
+        self.lineEdit_command.setText("")
+        self.lineEdit_command.setPlaceholderText("")
+        self.lineEdit_command.setObjectName("lineEdit_command")
+        self.btn_execute = QtWidgets.QPushButton(self.tab_1)
+        self.btn_execute.setGeometry(QtCore.QRect(190, 420, 131, 71))
         font = QtGui.QFont()
-        font.setPointSize(20)
+        font.setPointSize(15)
         font.setBold(True)
         font.setWeight(75)
-        self.btn_done.setFont(font)
-        self.btn_done.setStyleSheet("background-color: rgb(222, 148, 0);\n"
+        self.btn_execute.setFont(font)
+        self.btn_execute.setStyleSheet("background-color: rgb(222, 148, 0);\n"
 "color: rgb(255, 255, 255);")
-        self.btn_done.setObjectName("btn_done")
+        self.btn_execute.setObjectName("btn_execute")
         self.sorry_text = QtWidgets.QLabel(self.tab_1)
         self.sorry_text.setGeometry(QtCore.QRect(120, 0, 400, 16))
         self.sorry_text.setStyleSheet("color: rgb(255, 255, 255);")
@@ -142,7 +140,6 @@ class Ui_MainWindow(object):
         self.lineEdit_port.setGeometry(QtCore.QRect(200, 260, 111, 31))
         self.lineEdit_port.setStyleSheet("color: rgb(170, 170, 170);")
         self.lineEdit_port.setText("")
-        self.lineEdit_port.setPlaceholderText("")
         self.lineEdit_port.setObjectName("lineEdit_port")
         self.label_port = QtWidgets.QLabel(self.tab_1)
         self.label_port.setGeometry(QtCore.QRect(200, 220, 111, 41))
@@ -170,9 +167,26 @@ class Ui_MainWindow(object):
         self.label_version.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_version.setObjectName("label_version")
         self.label_updates = QtWidgets.QLabel(self.tab_2)
-        self.label_updates.setGeometry(QtCore.QRect(10, 40, 241, 31))
+        self.label_updates.setGeometry(QtCore.QRect(10, 100, 361, 31))
         self.label_updates.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_updates.setObjectName("label_updates")
+        self.label_version_2 = QtWidgets.QLabel(self.tab_2)
+        self.label_version_2.setGeometry(QtCore.QRect(10, 50, 191, 41))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_version_2.setFont(font)
+        self.label_version_2.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_version_2.setObjectName("label_version_2")
+        self.label_updates_2 = QtWidgets.QLabel(self.tab_2)
+        self.label_updates_2.setGeometry(QtCore.QRect(10, 130, 111, 31))
+        self.label_updates_2.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_updates_2.setObjectName("label_updates_2")
+        self.label_updates_3 = QtWidgets.QLabel(self.tab_2)
+        self.label_updates_3.setGeometry(QtCore.QRect(10, 160, 111, 31))
+        self.label_updates_3.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_updates_3.setObjectName("label_updates_3")
         self.tabs.addTab(self.tab_2, "")
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -186,23 +200,44 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Database Master"))
         self.label_title.setText(_translate("MainWindow", "DATABASE MASTER"))
+        self.lineEdit_host.setPlaceholderText(_translate("MainWindow", "localhost"))
         self.label_host.setText(_translate("MainWindow", "Host"))
         self.label_user.setText(_translate("MainWindow", "User"))
+        self.lineEdit_user.setPlaceholderText(_translate("MainWindow", "root"))
         self.label_password.setText(_translate("MainWindow", "Password"))
         self.label_database.setText(_translate("MainWindow", "Database"))
-        self.label_request.setText(_translate("MainWindow", "Request"))
-        self.btn_done.setText(_translate("MainWindow", "Done"))
+        self.lineEdit_database.setPlaceholderText(_translate("MainWindow", "testdb"))
+        self.label_command.setText(_translate("MainWindow", "Command"))
+        self.btn_execute.setText(_translate("MainWindow", "Execute"))
         self.sorry_text.setText(_translate("MainWindow", "I sincerely apologize for this design. It will be improved in the future."))
+        self.lineEdit_port.setPlaceholderText(_translate("MainWindow", "3306"))
         self.label_port.setText(_translate("MainWindow", "Port"))
         self.tabs.setTabText(self.tabs.indexOf(self.tab_1), _translate("MainWindow", "Menu"))
-        self.label_version.setText(_translate("MainWindow", "Version: 1.0.0"))
-        self.label_updates.setText(_translate("MainWindow", "There will definitely be something here..."))
+        self.label_version.setText(_translate("MainWindow", "Version: 1.0.1"))
+        self.label_updates.setText(_translate("MainWindow", "1. The interface has been slightly updated (I made it clearer)."))
+        self.label_version_2.setText(_translate("MainWindow", "What\'s new:"))
+        self.label_updates_2.setText(_translate("MainWindow", "2. Added pop-ups."))
+        self.label_updates_3.setText(_translate("MainWindow", "That\'s all :)"))
         self.tabs.setTabText(self.tabs.indexOf(self.tab_2), _translate("MainWindow", "Updates"))
-
+    
     def done(self):
-        self.btn_done.clicked.connect(self.main)
+        self.btn_execute.clicked.connect(self.main)
 
     def main(self):
+        successfullyMsg = QMessageBox()
+        successfullyMsg.setWindowTitle("Done")
+        successfullyMsg.setText("Operation completed successfully!")
+        successfullyMsg.setInformativeText("Check your database.")
+        successfullyMsg.setDetailedText("This popup was made at 11:48 pm. I don't know why you need this information. This text will be removed in version 1.1.0.")
+        successfullyMsg.setStandardButtons(QMessageBox.Ok)
+        successfullyMsg.buttonClicked.connect(self.ok_btn_action)
+
+        errorMsg = QMessageBox()
+        errorMsg.setWindowTitle("Error")
+        errorMsg.setText("Something went wrong...")
+        errorMsg.setStandardButtons(QMessageBox.Ok)
+        errorMsg.buttonClicked.connect(self.ok_btn_action)
+
         try:
             connection = pymysql.connect(
                 host=self.lineEdit_host.text(),
@@ -216,15 +251,24 @@ class Ui_MainWindow(object):
 
             try:
                 with connection.cursor() as cursor:
-                    request = f"{self.lineEdit_request.text()}"
-                    cursor.execute(request)
+                    command = f"{self.lineEdit_command.text()}"
+                    cursor.execute(command)
                     connection.commit()
                     print("Operation completed successfully!")
+                    successfullyMsg.exec_()
             finally:
                 connection.close()
         except Exception as ex:
-            print("Connection failed...")
-            print(ex)
+            errorMsg.setInformativeText(f"{ex}")
+            errorMsg.exec_()
+
+            print("Something went wrong...")
+            print(f"Cause: {ex}")
+
+    def ok_btn_action(self, btn):
+        if btn.text() == "OK":
+            self.lineEdit_command.setText("")
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
